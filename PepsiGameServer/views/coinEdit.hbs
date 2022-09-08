@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="Insert">
+            <h1 class="textInsert">Thêm Mới Sản Phẩm</h1>
+        </div>
+        <form role="form" method="post" action="/coin/{{coins._id}}/edit" enctype="multipart/form-data">
+            <div class="left">
+                <div>
+                    <label class="text">Name :</label>
+                    <input class="inputText" id="name" type="text" name="name" value="{{coins.name}}" />
+                </div>
+                <div class="left_top">
+                    <label class="text">Coin: </label>
+                    <input class="inputText" id="coin" type="number" name="coin" value="{{coins.coin}}" />
+                </div>
+                <div class="left_top">
+                    <label class="text">Hình</label>
+                    <input id="image-file" class="form-control" onchange="onChangeFile()" name="image" type="file" />
+                    <img id="image-view" style="display: none; object-fit: cover; border-radius: 5px; margin-top: 10px;"
+                        width="300" height="250" src="{{coins.image}}" />
+                </div>
+
+
+                <div class="btn">
+                    <button type="submit" id="submit" class="btnSubmit">Submit</button>
+                    <button type="reset" class="btnSubmit">Reset</button>
+                    <button class="btnSubmit"><a href="coin"></a>Back</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
+
+<style>
+    body {
+        background-color: #27B6D7;
+    }
+
+    .container {
+        width: 70vw;
+        height: 750PX;
+        padding: 0 14px;
+        align-items: center;
+        border: 3px solid #C0C0C0;
+        background-color: whitesmoke;
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px aqua;
+        margin-left: 200px;
+        margin-top: 100px;
+    }
+
+    .Insert {
+        border-bottom: 1px solid #C0C0C0;
+        margin-bottom: 20px;
+        width: 70vw;
+    }
+
+    .textInsert {
+        text-align: center;
+        color: #27B6D7;
+    }
+
+    .inputText {
+        width: 500px;
+        height: 20px;
+        border: 1px solid #C0C0C0;
+        border-radius: 5px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        display: flex;
+        padding-left: 10px;
+        font-size: 14px;
+    }
+
+    .inputText:hover {
+        border: 1px solid #27B6D7;
+    }
+
+    .text {
+        color: #27B6D7;
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    .left_top {
+        margin-top: 10px;
+    }
+
+    .left {
+        float: left;
+    }
+
+    .right {
+        float: right;
+    }
+
+    .btn {
+        margin-top: 50px;
+        float: right;
+    }
+
+    .btnSubmit {
+        background-color: #27B6D7;
+        border: 1px solid #27B6D7;
+        width: 100px;
+        height: 30px;
+        border-radius: 10px;
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .btnSubmit:hover {
+        background-color: aliceblue;
+        color: #25BB;
+    }
+</style>
+
+<script>
+    const onChangeFile = () => {
+        const file = document.getElementById('image-file').files[0];
+        const reader = new FileReader();
+        reader.onload = e => {
+            document.getElementById('image-view').src = e.target.result;
+            document.getElementById('image-view').style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+    }
+</script>

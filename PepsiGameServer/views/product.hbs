@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="textProduct">
+            <h1>Danh Sách Các Sản Phẩm</h1>
+        </div>
+        <div class="search">
+            <form action="" style="margin-left: 116px;">
+                <button class="btnSearch"> <a href="/product/addProduct" class="textSearch"> + Thêm mới</a>
+                </button>
+                <button class="btnSearch"> <a href="/product" class="textSearch"> Quay lại</a> </button>
+            </form>
+        </div>
+        <div class="products">
+            <table>
+                <thead>
+                    <tr>
+                        <th rowspan="2">STT</th>
+                        <th rowspan="2">Name</th>
+                        <th rowspan="2">Price</th>
+                        <th rowspan="2">Images</th>
+                        <th rowspan="2">quantity</th>
+                        <th rowspan="2">Edit Delete</th>
+                    </tr>
+
+        </div>
+        </thead>
+        {{#each products}}
+        <tbody>
+            <tr>
+                <td>{{this.index}}</td>
+                <td>{{this.name}}</td>
+                <td>{{this.price}}</td>
+                <td>
+                    <img src="{{this.image}}" width="100" height="100" />
+                </td>
+                <td>{{this.quantity}}</td>
+
+                <td>
+                    <a onclick="edit('{{this._id}}')" class="iconEdit"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <a onclick="return xoa('{{this._id}}');" class="iconDelete" id="myBtn"><i
+                            class="fa-solid fa-trash"></i></a>
+                </td>
+
+            </tr>
+        </tbody>
+        {{/each}}
+        </table>
+
+    </div>
+</body>
+
+</html>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        width: 100vw;
+    }
+
+    .navbar {
+        background-color: #27B6D7;
+        margin-bottom: 30px;
+        width: 100vw;
+        text-align: center;
+        height: 100px;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    li {
+        margin-top: 40px;
+    }
+
+    li a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        padding: 14px 30px;
+        font-weight: 700;
+    }
+
+    li a:hover {
+        border-bottom: 2px solid #25BB;
+        color: #25BB;
+    }
+
+    .iconUsser {
+        padding: 40px 30px;
+    }
+
+    .TextIcon {
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+    }
+
+    .TextIcon:hover {
+        color: #25BB;
+    }
+
+    .textProduct {
+        border-bottom: 2px solid #C0C0C0;
+        text-align: center;
+        color: #27B6D7;
+        font-weight: bold;
+    }
+
+    .search {
+        text-align: center;
+        background-color: white;
+        padding: 14px;
+        margin-left: -340px;
+    }
+
+    .inputSearch {
+        width: 800px;
+        height: 23px;
+        border: 1px solid #C0C0C0;
+        padding-left: 30px;
+    }
+
+    .inputSearch:hover {
+        border: 1px solid #27B6D7;
+    }
+
+    .btnSearch {
+        background-color: #27B6D7;
+        border-radius: 2px;
+        width: 100px;
+        height: 27px;
+        border: 1px solid #27B6D7;
+        margin-left: 10px;
+    }
+
+    .btnSearch:hover {
+        background-color: white;
+    }
+
+    .textSearch {
+        color: white;
+        font-size: 14px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .textSearch:hover {
+        color: #25BB;
+    }
+
+    .product {
+        width: 1400px;
+        margin: auto;
+    }
+
+    tr th {
+        box-shadow: 0px 0px 5px #99b8bf;
+        width: 150px;
+        color: black;
+        font-size: 14px;
+        background-color: #60cbe3;
+    }
+
+    tr td {
+        box-shadow: 0px 0px 5px #C0C0C0;
+        width: 150px;
+        color: black;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .iconEdit {
+        color: #27B6D7;
+    }
+
+    .iconEdit:hover {
+        color: orangered;
+    }
+
+    .iconDelete {
+        color: #27B6D7;
+        margin-left: 10px;
+    }
+
+    .iconDelete:hover {
+        color: orangered;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        margin-top: 10px;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        font-weight: 700;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f1f1f1
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+</style>
+
+<script>
+    const edit = (id) => {
+        // http://localhost:3000/products/:id/edit
+        window.location.href = `http://localhost:3000/product/${id}/edit`
+    }
+
+    let deleted_id;
+
+    const onClickDelete = (id) => {
+        deleted_id = id;
+    }
+
+    const fetchAPI = async (url, option) => {
+        const res = await fetch(url, option);
+        return res.json();
+    }
+    const onDelete = async () => {
+        const url = `http://localhost:3000/product/${deleted_id}/delete`;
+        const option = {
+            method: 'delete',
+            headers: { 'Content-Type': 'application/json' }
+        }
+        try {
+            await fetchAPI(url, option);
+            window.location.href = '/product';
+        } catch (e) { console.log('Delete error: ', e) }
+    }
+
+    function xoa(id) {
+        var result = confirm("Do you want to delete this product ?");
+        onClickDelete(id);
+        if (result == true) {
+            alert("You agree to delete");
+            onDelete();
+        } else {
+            return null;
+        }
+    }
+
+</script>
