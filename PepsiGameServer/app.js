@@ -13,6 +13,7 @@ var apiRouter = require("./routes/api");
 var productRouter = require("./routes/product");
 var giftRouter = require("./routes/gift");
 var coinRouter = require("./routes/coin");
+var prRouter = require("./routes/qr");
 
 var app = express();
 
@@ -47,10 +48,11 @@ mongoose
   .catch((err) => console.log(">>>>>>>>> DB Error: ", err));
 
 app.use("/user", usersRouter);
-app.use("/myGift", giftRouter);
+app.use("/gift", giftRouter);
 app.use("/product", productRouter);
 app.use("/api", apiRouter);
 app.use("/coin", coinRouter);
+app.use("/maQR", prRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

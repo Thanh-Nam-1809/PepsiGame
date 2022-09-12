@@ -7,6 +7,7 @@ exports.login = async (username) => {
     },
     "id username password coin numberPlay numberExchange numberFree"
   );
+  console.log("user: ", user);
   return user;
 };
 
